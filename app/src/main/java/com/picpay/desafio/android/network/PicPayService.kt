@@ -1,6 +1,7 @@
 package com.picpay.desafio.android.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.picpay.desafio.android.domain.User
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
@@ -12,7 +13,7 @@ import retrofit2.http.GET
 interface PicPayService {
 
     @GET("users")
-    fun getUsers(): Deferred<NetworkUserContainer>
+    fun getUsers(): Deferred<List<User>>
 }
 
 private val moshi = Moshi.Builder()

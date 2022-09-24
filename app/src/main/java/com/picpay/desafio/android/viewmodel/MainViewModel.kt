@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.picpay.desafio.android.domain.User
 import com.picpay.desafio.android.network.Network
-import com.picpay.desafio.android.network.asDomainModel
 import kotlinx.coroutines.launch
 import java.io.IOException
 
@@ -21,7 +20,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private fun getContactList() = viewModelScope.launch {
         try {
             val contactList = Network.picpayContacts.getUsers().await()
-            _contactList.postValue(contactList.asDomainModel())
+            _contactList.postValue(contactList)
         } catch (networkError: IOException) {
 
         }
