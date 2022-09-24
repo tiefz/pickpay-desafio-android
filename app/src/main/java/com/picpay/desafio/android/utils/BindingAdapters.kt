@@ -15,7 +15,6 @@ fun goneIfNotNull(view: View, it: Any?) {
 
 @BindingAdapter("imageUrl")
 fun setImageUrl(imageView: ImageView, url: String) {
-    //Glide.with(imageView.context).load(url).into(imageView)
     url.let {
         val imgUri = it.toUri().buildUpon().scheme("https").build()
         Glide.with(imageView.context)
@@ -23,6 +22,7 @@ fun setImageUrl(imageView: ImageView, url: String) {
             .apply(
                 RequestOptions()
                     .placeholder(R.drawable.ic_round_account_circle)
+                    .error(R.drawable.ic_round_account_circle)
             )
             .into(imageView)
     }

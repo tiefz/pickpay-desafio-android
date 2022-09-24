@@ -13,6 +13,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val contactList: LiveData<List<User>>
         get() = _contactList
 
+    private val _hasNetworkData = MutableLiveData<Boolean>()
+    val hasNetworkData: LiveData<Boolean>
+        get() = _hasNetworkData
+
     init {
         getContactList()
     }
@@ -21,8 +25,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         try {
             val contactList = Network.picpayContacts.getUsers().await()
             _contactList.postValue(contactList)
+            _hasNetworkData.value = true
         } catch (networkError: IOException) {
-
+            _hasNetworkData.value = false
         }
     }
 
