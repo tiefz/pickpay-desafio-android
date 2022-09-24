@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.picpay.desafio.android.viewmodel.MainViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -52,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
-                    android:visibility="gone"
+                    app:goneIfNotNull="@{viewModel.contactList}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/recyclerView"
                     app:layout_constraintStart_toStartOf="@+id/recyclerView"
