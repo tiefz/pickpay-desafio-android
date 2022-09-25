@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion 33
@@ -96,7 +97,7 @@ dependencies {
     //Coroutines for retrofit
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$version_retrofit_coroutines_adapter"
 
-    // Change Gson to Moshi for parsing the JSON format
+    //Change Gson to Moshi for parsing the JSON format
     implementation "com.squareup.moshi:moshi:$moshi_version"
     implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
@@ -107,4 +108,14 @@ dependencies {
     //Room database
     implementation "androidx.room:room-runtime:$version_room"
     kapt "androidx.room:room-compiler:$version_room"
+
+    //Dependency injection with Dagger Hilt
+    implementation "com.google.dagger:hilt-android:$version_dagger_hilt"
+    kapt("com.google.dagger:hilt-android-compiler:$version_dagger_hilt")
+
+    implementation "androidx.activity:activity-ktx:$version_activity_ktx"
+}
+
+kapt {
+    correctErrorTypes = true
 }
