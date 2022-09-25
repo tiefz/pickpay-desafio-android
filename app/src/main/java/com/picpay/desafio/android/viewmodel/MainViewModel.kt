@@ -1,31 +1,30 @@
 package com.picpay.desafio.android.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.*
-import com.picpay.desafio.android.domain.User
-import com.picpay.desafio.android.network.Network
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import com.picpay.desafio.android.database.getDatabase
+import com.picpay.desafio.android.repository.PicPayRepository
 import kotlinx.coroutines.launch
-import java.io.IOException
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val _contactList = MutableLiveData<List<User>>()
-    val contactList: LiveData<List<User>>
-        get() = _contactList
+    private val database = getDatabase(application)
+    private val usersRepository = PicPayRepository(database)
+
+//    private val _hasNetworkData = MutableLiveData<Boolean>()
+//    val hasNetworkData: LiveData<Boolean>
+//        get() = _hasNetworkData
 
     init {
-        getContactList()
-    }
-
-    private fun getContactList() = viewModelScope.launch {
-        try {
-            val contactList = Network.picpayContacts.getUsers().await()
-            _contactList.postValue(contactList)
-        } catch (networkError: IOException) {
-
+        viewModelScope.launch {
+            usersRepository.refreshUsers()
         }
     }
 
+    val contactList = usersRepository.users
 
     class Factory(val app: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
