@@ -14,6 +14,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val database = getDatabase(application)
     private val usersRepository = PicPayRepository(database)
 
+//    private val _hasNetworkData = MutableLiveData<Boolean>()
+//    val hasNetworkData: LiveData<Boolean>
+//        get() = _hasNetworkData
+
     init {
         viewModelScope.launch {
             usersRepository.refreshUsers()

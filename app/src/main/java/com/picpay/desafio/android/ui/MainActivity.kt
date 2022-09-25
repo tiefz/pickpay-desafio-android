@@ -43,13 +43,5 @@ class MainActivity : AppCompatActivity() {
                 adapter.users = users
             }
         }
-//        viewModel.hasNetworkData.observe(this) {
-//            if (!it) {
-//                val message = getString(R.string.error)
-//                binding.userListProgressBar.visibility = View.GONE
-//                Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG)
-//                    .show()
-//            }
-//        }
     }
 }

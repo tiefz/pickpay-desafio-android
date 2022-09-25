@@ -11,6 +11,7 @@ import com.picpay.desafio.android.network.NetworkUserContainer
 import com.picpay.desafio.android.network.asDatabaseModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.io.IOException
 
 class PicPayRepository(private val database: UsersDatabase) {
 
@@ -21,17 +22,21 @@ class PicPayRepository(private val database: UsersDatabase) {
 
     suspend fun refreshUsers() {
         withContext(Dispatchers.IO) {
-            val users = Network.picpayContacts.getUsersAsync().await()
-            val usersList: List<NetworkUser> = users.map {
-                NetworkUser(
-                    img = it.img,
-                    name = it.name,
-                    id = it.id,
-                    username = it.username
-                )
+            try {
+                val users = Network.picpayContacts.getUsersAsync().await()
+                val usersList: List<NetworkUser> = users.map {
+                    NetworkUser(
+                        img = it.img,
+                        name = it.name,
+                        id = it.id,
+                        username = it.username
+                    )
+                }
+                val contactList = NetworkUserContainer(usersList)
+                database.userDao.insertAll(*contactList.asDatabaseModel())
+            } catch (networkError: IOException) {
+                //todo offline sanckbar
             }
-            val contactList = NetworkUserContainer(usersList)
-            database.userDao.insertAll(*contactList.asDatabaseModel())
         }
     }
 }

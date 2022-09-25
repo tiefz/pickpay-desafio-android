@@ -14,16 +14,6 @@ data class NetworkUser(
     val username: String
 )
 
-//fun NetworkUserContainer.asDomainModel(): List<User> {
-//    return users.map {
-//        User(
-//            img = it.img,
-//            name = it.name,
-//            id = it.id,
-//            username = it.username)
-//    }
-//}
-
 fun NetworkUserContainer.asDatabaseModel(): Array<DatabaseUser> {
     return users.map {
         DatabaseUser(
