@@ -17,14 +17,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: UserListAdapter
 
-//    private val viewModel: MainViewModel by lazy {
-//        ViewModelProvider(
-//            this,
-//            MainViewModel.Factory(this.application)
-//        )[MainViewModel::class.java]
-//
-//    }
-
     private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
