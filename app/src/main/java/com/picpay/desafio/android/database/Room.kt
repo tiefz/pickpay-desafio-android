@@ -13,7 +13,7 @@ interface UserDao {
     fun insertAll(vararg users: DatabaseUser)
 }
 
-@Database(entities = [DatabaseUser::class], version = 1)
+@Database(entities = [DatabaseUser::class], version = 1, exportSchema = false)
 abstract class UsersDatabase : RoomDatabase() {
     abstract val userDao: UserDao
 }
