@@ -13,7 +13,7 @@ import retrofit2.http.GET
 interface PicPayService {
 
     @GET("users")
-    fun getUsers(): Deferred<List<User>>
+    fun getUsersAsync(): Deferred<List<User>>
 }
 
 private val moshi = Moshi.Builder()
