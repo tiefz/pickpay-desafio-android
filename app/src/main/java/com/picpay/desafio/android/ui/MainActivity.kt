@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
             users.apply {
                 adapter.users = users
             }
+            viewModel.updateView()
         }
     }
 }
