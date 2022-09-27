@@ -2,6 +2,7 @@ package com.picpay.desafio.android.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
+import com.picpay.desafio.android.database.DatabaseUser
 import com.picpay.desafio.android.database.UserDao
 import com.picpay.desafio.android.database.asDomainModel
 import com.picpay.desafio.android.domain.User
@@ -42,5 +43,13 @@ class PicPayRepository @Inject constructor(
                 //todo offline sanckbar
             }
         }
+    }
+
+    fun getDatabaseUser(): LiveData<List<DatabaseUser>> {
+        return userDao.getUsers()
+    }
+
+    suspend fun getApiResponseUser(): List<User> = withContext(Dispatchers.IO) {
+        return@withContext picpayService.getUsersAsync().await()
     }
 }
