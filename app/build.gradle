@@ -112,8 +112,10 @@ dependencies {
     //Dependency injection with Dagger Hilt
     implementation "com.google.dagger:hilt-android:$version_dagger_hilt"
     kapt("com.google.dagger:hilt-android-compiler:$version_dagger_hilt")
-
     implementation "androidx.activity:activity-ktx:$version_activity_ktx"
+
+    //Mockk for API test
+    testImplementation "io.mockk:mockk:$version_mockk"
 }
 
 kapt {
