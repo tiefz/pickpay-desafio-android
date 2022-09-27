@@ -13,7 +13,7 @@ data class DatabaseUser constructor(
     val username: String
 )
 
-fun List<DatabaseUser>.asDomanModel(): List<User> {
+fun List<DatabaseUser>.asDomainModel(): List<User> {
     return map {
         User(
             img = it.img,

@@ -31,7 +31,7 @@ object PicpayModule {
         return usersDatabase.getDao()
     }
 
-    val baseUrl = "https://609a908e0f5a13001721b74e.mockapi.io/picpay/api/"
+    private const val baseUrl = "https://609a908e0f5a13001721b74e.mockapi.io/picpay/api/"
 
     private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())

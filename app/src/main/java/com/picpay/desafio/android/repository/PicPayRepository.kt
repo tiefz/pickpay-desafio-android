@@ -2,8 +2,9 @@ package com.picpay.desafio.android.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
+import com.picpay.desafio.android.database.DatabaseUser
 import com.picpay.desafio.android.database.UserDao
-import com.picpay.desafio.android.database.asDomanModel
+import com.picpay.desafio.android.database.asDomainModel
 import com.picpay.desafio.android.domain.User
 import com.picpay.desafio.android.network.NetworkUser
 import com.picpay.desafio.android.network.NetworkUserContainer
@@ -21,7 +22,7 @@ class PicPayRepository @Inject constructor(
 
     val users: LiveData<List<User>> =
         Transformations.map(userDao.getUsers()) {
-            it.asDomanModel()
+            it.asDomainModel()
         }
 
     suspend fun refreshUsers() {
@@ -42,5 +43,13 @@ class PicPayRepository @Inject constructor(
                 //todo offline sanckbar
             }
         }
+    }
+
+    fun getDatabaseUser(): LiveData<List<DatabaseUser>> {
+        return userDao.getUsers()
+    }
+
+    suspend fun getApiResponseUser(): List<User> = withContext(Dispatchers.IO) {
+        return@withContext picpayService.getUsersAsync().await()
     }
 }
